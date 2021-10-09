@@ -1,4 +1,4 @@
-package com.yitu.二叉树;
+package com.yitu.树;
 
 import com.yitu.TreeNode;
 
