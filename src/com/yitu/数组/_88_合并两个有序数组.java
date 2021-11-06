@@ -1,5 +1,7 @@
 package com.yitu.数组;
 
+import java.util.Arrays;
+
 /**
  * https://leetcode-cn.com/problems/merge-sorted-array/
  * nums1.length == m + n
@@ -10,34 +12,27 @@ package com.yitu.数组;
  */
 public class _88_合并两个有序数组 {
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
-        int[] leftArray=new int[m];
-        int li=0,le=m;
-        int ri=0,re=n;
-        int ai=0;
-        // 备份nums1数组
-        for(int i=0;i<m;i++){
-            leftArray[i]=nums1[i];
-        }
-        while (li<le&&ri<re){
-            if(leftArray[li]<nums2[ri]){
-                nums1[ai++]=leftArray[li++];
-            }else {
-                nums1[ai++]=nums2[ri++];
+        // nums1 = [1,3,5,0,0,0]    m = 3
+        // nums2 = [2,4,6]          n = 3
+        int i1 = m - 1;
+        int i2 = n - 1;
+        int cur = nums1.length - 1;
+
+        while (i2 >= 0) {
+            if (i1 >= 0 && nums2[i2] < nums1[i1]) {
+                nums1[cur--] = nums1[i1--];
+            } else { // // i1 < 0 || nums2[i2] >= nums1[i1]
+                nums1[cur--] = nums2[i2--];
             }
-        }
-        while (li<le){
-            nums1[ai++]=leftArray[li++];
-        }
-        while (ri<re){
-            nums1[ai++]=nums2[ri++];
         }
     }
 
     public static void main(String[] args) {
-        int[] num1={1,2,3,0,0,0};
-        int m=3;
-        int[] num2={2,5,6};
-        int n=3;
-        merge(num1,m,num2,n);
+        int[] num1 = {1, 2, 3, 0, 0, 0};
+        int m = 3;
+        int[] num2 = {2, 5, 6};
+        int n = 3;
+        merge(num1, m, num2, n);
+        System.out.println(Arrays.toString(num1));
     }
 }
