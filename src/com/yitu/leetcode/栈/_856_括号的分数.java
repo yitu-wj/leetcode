@@ -1,6 +1,5 @@
 package com.yitu.leetcode.栈;
 
-import java.util.Stack;
 
 /**
  * https://leetcode-cn.com/problems/score-of-parentheses/
