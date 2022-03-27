@@ -42,7 +42,7 @@ public class _224_基本计算器 {
             }
         }
         StringBuilder sb = new StringBuilder();
-        if(isNumeric(sb.toString())) return Integer.parseInt(sb.toString());
+        if (isNumeric(sb.toString())) return Integer.parseInt(sb.toString());
         while (!stack.isEmpty()) {
             sb.insert(0, stack.pop());
         }
@@ -99,18 +99,58 @@ public class _224_基本计算器 {
         return str != null && str.matches("-?\\d+(\\.\\d+)?");
     }
 
+    public int calculate2(String s) {
+        Deque<Integer> ops = new LinkedList<Integer>();
+        ops.push(1);
+        int sign = 1;
+
+        int ret = 0;
+        int n = s.length();
+        int i = 0;
+        while (i < n) {
+            if (s.charAt(i) == ' ') {
+                i++;
+            } else if (s.charAt(i) == '+') {
+                sign = ops.peek();
+                i++;
+            } else if (s.charAt(i) == '-') {
+                sign = -ops.peek();
+                i++;
+            } else if (s.charAt(i) == '(') {
+                ops.push(sign);
+                i++;
+            } else if (s.charAt(i) == ')') {
+                ops.pop();
+                i++;
+            } else {
+                long num = 0;
+                while (i < n && Character.isDigit(s.charAt(i))) {
+                    num = num * 10 + s.charAt(i) - '0';
+                    i++;
+                }
+                ret += sign * num;
+            }
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
         String s1 = "2+(2+1-2)+5";
         String s2 = "(1+(4+5+2)-3)+(6+8)";
         String s3 = "(5-(1+(5)))";
-        String s4="- (3 - (- (4 + 5) ) )";
+        String s4 = "- (3 - (- (4 + 5) ) )";
+        String s5 = "1 * 1+(3*8)";
         int result1 = new _224_基本计算器().calculate(s1);
         int result2 = new _224_基本计算器().calculate(s2);
         int result3 = new _224_基本计算器().calculate(s3);
         int result4 = new _224_基本计算器().calculate(s4);
+        int result5 = new _224_基本计算器().calculate(s5);
         System.out.println(result1);
         System.out.println(result2);
         System.out.println(result3);
         System.out.println(result4);
+        System.out.println(result5);
+
+        System.out.println(new _224_基本计算器().calculate2("1-2-(5+2)"));
     }
 }
