@@ -1,6 +1,5 @@
 package com.yitu.leetcode.位运算;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -8,14 +7,10 @@ import java.util.Arrays;
  */
 public class _338_比特位计数 {
     public int[] countBits(int n) {
-        ArrayList<Integer> list = new ArrayList<>();
+        int[] result = new int[n + 1];
         for (int i = 0; i <= n; i++) {
             int count = hammingWeight(i);
-            list.add(count);
-        }
-        int[] result = new int[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            result[i] = list.get(i);
+            result[i] = count;
         }
         return result;
     }
