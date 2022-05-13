@@ -1,4 +1,4 @@
-package com.yitu.leetcode.树;
+package com.yitu.leetcode.二叉树;
 
 import com.yitu.leetcode.TreeNode;
 
